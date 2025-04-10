@@ -20,6 +20,7 @@ if(DEFINED ENV{RERUN_SET_CXX_VERSION})
     set(CMAKE_CXX_STANDARD $ENV{RERUN_SET_CXX_VERSION})
 endif()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated -Werror=deprecated-declarations")
 # ------------------------------------------------------------------------------
 function(rerun_strict_warning_settings target)
     if(MSVC)
@@ -204,3 +205,5 @@ add_custom_target(ALL DEPENDS ${all_targets})
 foreach(target IN LISTS all_targets_list)
     add_dependencies(ALL ${target})
 endforeach()
+
+message(STATUS "top-level options: ${CMAKE_CXX_FLAGS}")

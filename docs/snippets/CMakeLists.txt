@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.16...3.27)
 # Setup builds for examples
 file(GLOB_RECURSE sources_list true ${CMAKE_CURRENT_SOURCE_DIR}/all/*.cpp)
 
+# fail build if deprecated calls are made
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=deprecated-declarations")
+
 # Not complete examples:
 list(FILTER sources_list EXCLUDE REGEX .*/concepts/static/*)
 list(FILTER sources_list EXCLUDE REGEX .*/tutorials/custom-application-id.*)
@@ -42,3 +45,5 @@ target_link_libraries(any_values_column_updates PRIVATE rerun_arrow_target)
 target_link_libraries(any_values_row_updates PRIVATE rerun_arrow_target)
 target_link_libraries(extra_values PRIVATE rerun_arrow_target)
 target_link_libraries(recording_properties PRIVATE rerun_arrow_target)
+
+message(STATUS "snippets options: ${CMAKE_CXX_FLAGS}")

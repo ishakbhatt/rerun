@@ -240,9 +240,13 @@ install(FILES
     DESTINATION ${RERUN_SDK_INSTALL_CMAKE_DIR}
 )
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=deprecated-declarations")
+
 # -----------------------------------------------------------------------------
 # Add tests if they exist (they are not part of the distribution zip).
 # Has direct dependency to arrow, so needs to happen last.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
 endif()
+
+message(STATUS "rerun_cpp options: ${CMAKE_CXX_FLAGS}")
